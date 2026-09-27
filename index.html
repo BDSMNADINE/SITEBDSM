@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nadine | Haute Domination & Protocole</title>
+    <!-- Importation des polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --bg-dark: #050505;
+            --bg-light: #111111;
+            --accent-gold: #c5a059;
+            --accent-red: #7a0016;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --border-gold: rgba(197, 160, 89, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .serif {
+            font-family: 'Cinzel', serif;
+            font-weight: 400;
+        }
+
+        /* --- AVERTISSEMENT D'ÂGE (+18) --- */
+        #age-gate {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .age-gate-content {
+            background: var(--bg-light);
+            border: 1px solid var(--border-gold);
+            padding: 60px 40px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(122, 0, 22, 0.1);
+            position: relative;
+        }
+
+        .age-gate-content::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            pointer-events: none;
+        }
+
+        .age-gate-content h2 {
+            color: var(--accent-gold);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+        }
+
+        .age-gate-content p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            background: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 15px 40px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(122, 0, 22, 0.15) 0%, rgba(5,5,5,1) 70%);
+            position: relative;
+            border-bottom: 1px solid var(--border-gold);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 1px; height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--accent-gold));
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            color: #ffffff;
+            letter-spacing: 8px;
+            text-shadow: 0 0 30px rgba(255,255,255,0.1);
+            margin-bottom: 15px;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            letter-spacing: 6px;
+            font-style: italic;
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 120px 10%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h3 {
+            font-size: 2.8rem;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .section-header .line {
+            width: 80px;
+            height: 1px;
+            background: var(--accent-red);
+            margin: 0 auto;
+        }
+
+        /* --- PROFIL & IMAGE --- */
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .profile-text p {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .profile-details {
+            background: var(--bg-light);
+            border-left: 3px solid var(--accent-red);
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .profile-details ul {
+            list-style: none;
+        }
+
+        .profile-details li {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+        }
+
+        .profile-details span {
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            display: inline-block;
+            width: 140px;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 600px;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .profile-image img:hover {
+            transform: scale(1.03);
+        }
+
+        /* --- DISCIPLINES --- */
+        .disciplines {
+            background-color: var(--bg-light);
+            border-top: 1px solid rgba(255,255,255,0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .grid-disciplines {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: var(--bg-dark);
+            padding: 50px 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--accent-red);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--border-gold);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card h4 {
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- FORMULAIRE DE CANDIDATURE --- */
+        .contact-section {
+            background: var(--bg-dark);
+        }
+
+        .contact-wrapper {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: var(--bg-light);
+            padding: 50px;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            transition: opacity 0.5s ease;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            font-size: 1.05rem;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            background: var(--bg-dark);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-main);
+            padding: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 12px;
+            accent-color: var(--accent-red);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        /* MESSAGE DE CONFIRMATION PERSONALISÉ */
+        #form-status {
+            display: none;
+            background: var(--bg-light);
+            padding: 50px 30px;
+            border: 1px solid var(--accent-gold);
+            text-align: center;
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.2);
+        }
+
+        #form-status h4 {
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        #form-status p {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            line-height: 1.6;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: #000;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- ANIMATIONS --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .profile-container { grid-template-columns: 1fr; }
+            .checkbox-group { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3.5rem; }
+            .contact-form { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- AVERTISSEMENT D'ÂGE (+18) -->
+    <div id="age-gate">
+        <div class="age-gate-content">
+            <h2>Huis Clos</h2>
+            <p>Ce sanctuaire virtuel est strictement réservé à un public majeur et averti. En franchissant ce seuil, vous confirmez avoir plus de 18 ans.</p>
+            <button class="btn" onclick="enterSite()">Accepter & Entrer</button>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <h1 class="fade-in">Nadine</h1>
+        <h2 class="fade-in" style="transition-delay: 0.3s;">L'Art de la Soumission Élégante</h2>
+    </header>
+
+    <!-- SECTION PROFIL -->
+    <section id="profil">
+        <div class="section-header fade-in">
+            <h3>Le Profil</h3>
+            <div class="line"></div>
+        </div>
+        <div class="profile-container">
+            <div class="profile-text fade-in">
+                <p>Bienvenue dans mon univers. Je suis Nadine, une femme qui allie l'élégance naturelle à une autorité implacable. Née à Lille et aujourd'hui établie dans le raffinement du 16ème arrondissement de Paris, je reçois et façonne ceux qui ont le privilège de croiser mon chemin.</p>
+                <p>À 41 ans, je possède la maturité, la prestance et l'exigence nécessaires pour mener mes sujets exactement là où je le décide. Chez moi, la domination n'est pas un jeu, c'est un art de vivre fait de psychologie, de rigueur et d'une esthétique irréprochable.</p>
+                
+                <div class="profile-details">
+                    <ul>
+                        <li><span>Identité :</span> Daniela Merlot</li>
+                        <li><span>Alias :</span> Maîtresse Nadine</li>
+                        <li><span>Âge :</span> 41 ans</li>
+                        <li><span>Origine :</span> Lille</li>
+                        <li><span>Sanctuaire :</span> Paris, 16ème arr.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="profile-image fade-in" style="transition-delay: 0.2s;">
+                <img src="https://www.mistresses-london.co.uk/wp-content/uploads/2024/01/London-Mistress-Lady-Lola.jpg" alt="Maîtresse Nadine">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION DISCIPLINES -->
+    <section class="disciplines">
+        <div class="section-header fade-in">
+            <h3>Les Disciplines</h3>
+            <div class="line"></div>
+        </div>
+        <div class="grid-disciplines">
+            <div class="card fade-in">
+                <h4>Domination Financière</h4>
+                <p>Le sacrifice matériel comme ultime preuve de dévotion. Une emprise totale sur vos ressources pour vous apprendre la véritable valeur du renoncement et de l'obéissance.</p>
+            </div>
+            <div class="card fade-in" style="transition-delay: 0.1s;">
+                <h4>Protocole & Étiquette</h4>
+                <p>L'imposition de règles strictes, de postures et de rituels. Le moindre de vos gestes doit être approuvé, calculé et exécuté dans le respect absolu de mon autorité.</p>
+            </div>
+            <div class="card fade-in" style="transition-delay: 0.2s;">
+                <h4>Bondage Esthétique</h4>
+                <p>L'art de l'entrave. La restriction physique exécutée avec précision et élégance, vous privant de vos mouvements pour vous laisser seul face à votre soumission.</p>
+            </div>
+            <div class="card fade-in" style="transition-delay: 0.3s;">
+                <h4>Emprise Psychologique</h4>
+                <p>Un conditionnement mental profond. Humiliation verbale raffinée, destruction de l'ego et reconstruction de votre esprit selon mes propres désirs et standards.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION CANDIDATURE / SELECTION -->
+    <section class="contact-section">
+        <div class="section-header fade-in">
+            <h3>Soumission de Candidature</h3>
+            <div class="line"></div>
+        </div>
+        
+        <div class="contact-wrapper fade-in">
+            <!-- Formulaire -->
+            <form id="candidature-form" action="https://formspree.io/f/xjykaqyq" method="POST" class="contact-form">
+                
+                <div class="form-group">
+                    <label>Nom / Alias :</label>
+                    <input type="text" name="alias" required placeholder="Ex : Soumis #104">
+                </div>
+
+                <div class="form-group">
+                    <label>Adresse E-mail :</label>
+                    <input type="email" name="email" required placeholder="votre.email@exemple.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Choix des Pratiques & Disciplines :</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="disciplines[]" value="Domination Financière"> Domination Financière</label>
+                        <label><input type="checkbox" name="disciplines[]" value="Protocole & Étiquette"> Protocole & Étiquette</label>
+                        <label><input type="checkbox" name="disciplines[]" value="Bondage Esthétique"> Bondage Esthétique</label>
+                        <label><input type="checkbox" name="disciplines[]" value="Emprise Psychologique"> Emprise Psychologique</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Engagements & Motivations :</label>
+                    <textarea name="message" rows="5" required placeholder="Exprimez vos motivations et votre degré de dévotion..."></textarea>
+                </div>
+
+                <button type="submit" id="submit-btn" class="btn">Valider & Transmettre</button>
+            </form>
+
+            <!-- Message de succès personnalisé -->
+            <div id="form-status">
+                <h4>Candidature Transmise</h4>
+                <p>Votre message a été bien envoyé.<br>Soyez patient jusqu'à la réponse de Madame Nadine.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Nadine (Daniela Merlot) — Paris. Accès strictly réservé.</p>
+    </footer>
+
+    <!-- SCRIPT DE FONCTIONNEMENT -->
+    <script>
+        function enterSite() {
+            const gate = document.getElementById('age-gate');
+            gate.style.opacity = '0';
+            setTimeout(() => {
+                gate.style.visibility = 'hidden';
+                initObserver();
+            }, 800);
+        }
+
+        function initObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // --- GESTION DE L'ENVOI DISCRET DU FORMULAIRE ---
+        const form = document.getElementById("candidature-form");
+        const status = document.getElementById("form-status");
+        const submitBtn = document.getElementById("submit-btn");
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+            submitBtn.textContent = "Transmission en cours...";
+            submitBtn.disabled = true;
+
+            const data = new FormData(event.target);
+            
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    form.style.display = "none";
+                    status.style.display = "block";
+                } else {
+                    submitBtn.textContent = "Erreur - Réessayer";
+                    submitBtn.disabled = false;
+                    alert("Une erreur est survenue lors de la transmission. Veuillez réessayer.");
+                }
+            }).catch(error => {
+                submitBtn.textContent = "Erreur - Réessayer";
+                submitBtn.disabled = false;
+                alert("Problème de connexion. Veuillez réessayer.");
+            });
+        }
+
+        form.addEventListener("submit", handleSubmit);
+    </script>
+</body>
+</html>
